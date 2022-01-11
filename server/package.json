@@ -1,0 +1,30 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "@grpc/grpc-js": "1.4.4",
+    "@grpc/proto-loader": "0.5.3",
+    "amqplib": "^0.8.0",
+    "amqplib-plus": "^1.0.9",
+    "axios": "^0.24.0",
+    "body-parser": "1.19.1",
+    "debug": "4.3.3",
+    "dotenv": "^10.0.0",
+    "express": "4.17.1",
+    "express-graphql": "^0.12.0",
+    "express-ws": "^5.0.2",
+    "graphql": "^15.8.0",
+    "kafkajs": "^1.15.0",
+    "mysql2": "2.3.3",
+    "sequelize": "5.22.4",
+    "ws": "^8.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "scripts": {
+    "start": "nodemon src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
