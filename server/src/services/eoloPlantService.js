@@ -59,24 +59,24 @@ export async function postEoloPlantAsync(eoloPlantCreationRequest) {
     };
 
     //RabbitMQ
-    channel.sendToQueue("eoloplantCreationRequests", Buffer.from(JSON.stringify(data)));
+    // channel.sendToQueue("eoloplantCreationRequests", Buffer.from(JSON.stringify(data)));
 
     //Kafka
-    // const kafka = new Kafka({
-    //     logLevel: logLevel.DEBUG,
-    //     clientId: 'my-app',
-    //     brokers: ['localhost:9092'],
-    // })
-    //
-    // const producer = kafka.producer()
-    // await producer.connect()
-    // await producer.send({
-    //     topic: 'eoloplantCreationRequests',
-    //     messages: [
-    //         {value : JSON.stringify(data)}
-    //     ],
-    // }).then(console.log)
-    // .catch(e => console.error(`[example/producer] ${e.message}`, e))
+    const kafka = new Kafka({
+        logLevel: logLevel.DEBUG,
+        clientId: 'my-app',
+        brokers: ['localhost:9092'],
+    })
+
+    const producer = kafka.producer()
+    await producer.connect()
+    await producer.send({
+        topic: 'eoloplantCreationRequests',
+        messages: [
+            {value : JSON.stringify(data)}
+        ],
+    }).then(console.log)
+    .catch(e => console.error(`[example/producer] ${e.message}`, e))
 
     channel.consume("eoloplantCreationProgressNotifications", (msg) => {
         const id = JSON.parse(msg.content).id;
