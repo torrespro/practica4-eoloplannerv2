@@ -1,0 +1,54 @@
+@startuml "system"
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+' uncomment the following line and comment the first to use locally
+' !include C4_Container.puml
+
+skinparam wrapWidth 200
+skinparam maxMessageSize 200
+
+'LAYOUT_LEFT_RIGHT()
+LAYOUT_TOP_DOWN()
+'LAYOUT_AS_SKETCH
+'LAYOUT_WITH_LEGEND
+
+
+Person(customer, User, "A User")
+
+'System(system, System, "Another system")
+
+System_Boundary(c1, "Eolo Planner") {
+
+    Container(client, "Client Application", "Javascript", "Allows users to manage their Eolic Plants")
+    Container(server, "Server Application", "Javascript, NodeJs, GraphQL", "GraphQL & WebSocket")
+
+    Container(planner, "Planner", "Java, Spring Boot", "Obtiene la información del WeatherService y el TopoService y comunicando el progreso al Server")
+
+    ContainerQueue(mq, "Message Bus", "RabbitMQ/Kafka", "Transport for business events")
+
+    Container(weather_service, "Weather Service", "Node, gRPC", "Devuelve información meteorológica")
+
+    Container(topo_service, "Topo Service", "Java, Spring Boot", "Devuelve información sobre la orografía del terreno")
+
+    ContainerDb(eol_db, "EoloPlants Database", "MySQL", "Stores a eolic plants data")
+
+    ContainerDb(mongo_db, "Topo Database", "MongoDB", "Stores topographic data")
+
+}
+
+Rel(customer, client, "Uses", "/graphql")
+
+Rel(client, server, "Creates a new plant", "async, JSON/HTTPS")
+
+BiRel(server, mq, "Sends/Read events", "Async")
+BiRel(client, server, "Sends/Reads messages", "WebSocket")
+BiRel(planner, mq, "Sends/Read events", "Async")
+
+Rel(planner, topo_service, "Gets Topo information from", "REST")
+Rel(planner, weather_service, "Gets Weather information from", "gRPC")
+
+BiRel(topo_service, mongo_db, "Stores/Reads data", "JDBC")
+BiRel(weather_service, eol_db, "Stores/Reads data", "JDBC")
+
+Lay_R(topo_service, weather_service)
+
+@enduml

@@ -15,16 +15,14 @@ spring:
       default-binder: rabbit
       bindings:
         consumer-in-0:
-#          destination: requests
-#          group: eoloplantCreationRequests
-          destination: eoloplantCreationRequests
-          binder: kafka
+          destination: requests
+          group: eoloplantCreationRequests
+#          destination: eoloplantCreationRequests
         producer-out-0:
           destination: progress
           group: eoloplantCreationProgressNotifications
           producer:
             required-groups: eoloplantCreationProgressNotifications
-          binder: rabbit
       rabbit:
         binder:
           nodes: 'localhost:5672'
@@ -35,17 +33,17 @@ spring:
           producer-out-0:
             producer:
               queue-name-group-only: 'true'
-      kafka:
-        binder:
-          reset-offset: true
-          start-offset: latest
-          min-partition-count: 1
-          auto-create-topics: true
-          auto-add-partitions: true
-          # Specify the number of copies of Topic
-          replication-factor: 1
-          configuration:
-            max.request.size: 20000000
-          brokers:
-            - localhost:9092
+#      kafka:
+#        binder:
+#          reset-offset: true
+#          start-offset: latest
+#          min-partition-count: 1
+#          auto-create-topics: true
+#          auto-add-partitions: true
+#          # Specify the number of copies of Topic
+#          replication-factor: 1
+#          configuration:
+#            max.request.size: 20000000
+#          brokers:
+#            - localhost:9092
 

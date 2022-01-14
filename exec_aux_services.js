@@ -14,3 +14,4 @@ function exec(serviceName, command){
 
 exec('MongoDB', 'docker run --rm -d -p 27017-27019:27017-27019 --name mongodb mongo');
 exec('MySQL', 'docker run --rm -d -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=eoloplantsDB -p 3306:3306 --name mysql mysql:8.0.22');
+exec('RabbitMQ & Kafka', 'docker compose up');
