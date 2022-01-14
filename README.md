@@ -62,3 +62,7 @@ Ejecuta los servicios usando Kafka como cola de mensajes. En proyectos Java usa 
 ```
 $ node exec_kafka.js
 ```
+
+## Github Repo
+
+https://github.com/torrespro/practica4-eoloplannerv2
