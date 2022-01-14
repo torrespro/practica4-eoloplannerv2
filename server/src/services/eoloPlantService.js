@@ -6,7 +6,6 @@ import {pubSubManager} from '../express.js';
 import { kafka } from '../kafka.js';
 const requestQueue = 'eoloplantCreationRequests'
 const progressQueue = 'eoloplantCreationProgressNotifications'
-console.log(process.env);
 const MQ = process.env.SPRING_PROFILES_ACTIVE || 'rabbit';
 
 const debug = new DebugLib('server:eoloPlantService');

@@ -6,9 +6,6 @@ management:
       exposure:
         include: bindings
 spring:
-#  rabbitmq:
-#    username: admin
-#    password: admin
   cloud:
     stream:
       default-binder: kafka
@@ -17,18 +14,6 @@ spring:
           destination: eoloplantCreationRequests
         producer-out-0:
           destination: eoloplantCreationProgressNotifications
-          producer:
-            required-groups: eoloplantCreationProgressNotifications
-      rabbit:
-        binder:
-          nodes: 'localhost:5672'
-        bindings:
-          consumer-in-0:
-            consumer:
-              queue-name-group-only: 'true'
-          producer-out-0:
-            producer:
-              queue-name-group-only: 'true'
       kafka:
         binder:
           reset-offset: true

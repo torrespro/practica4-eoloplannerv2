@@ -33,17 +33,4 @@ spring:
           producer-out-0:
             producer:
               queue-name-group-only: 'true'
-#      kafka:
-#        binder:
-#          reset-offset: true
-#          start-offset: latest
-#          min-partition-count: 1
-#          auto-create-topics: true
-#          auto-add-partitions: true
-#          # Specify the number of copies of Topic
-#          replication-factor: 1
-#          configuration:
-#            max.request.size: 20000000
-#          brokers:
-#            - localhost:9092
 
